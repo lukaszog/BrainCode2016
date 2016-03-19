@@ -4,10 +4,11 @@
 <head>
     <title>Sentiment Analysis App</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
-<h1>Sentiment Analysis App</h1>
+
 <hr/>
 <input type="text" id="searchText" placeholder="Enter the text you would like to see the analysis for and hit return">
 <div class="results">
@@ -22,6 +23,9 @@
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
+
+<div id="graf"></div>
+
 <script type="text/html" id="tweet_tmpl">
     <article>
         <div class="left">

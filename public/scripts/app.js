@@ -24,15 +24,24 @@ $(document).ready(function() {
             success: parseData,
             error: oops
         });
+        console.log("To jest log");
+        console.log(text);
     }
 
     function parseData(data) {
         disableState();
+        var scoreResult = [];
         var html = '';
         for (var i = 0; i < data.length; i++) {
             var s = data[i].sentiment,
                 t = data[i].tweet;
+            console.log("Wynik: " + s.score);
 
+            if(s.score != 0) {
+                scoreResult[i] = s.score;
+                console.log("Wynik: " + s.score);
+
+            }
             var _o = {
                 imgSrc: t.user.profile_image_url,
                 tweetLink: 'http://twitter.com/' + t.user.screen_name + '/status/' + t.id_str,
@@ -48,8 +57,50 @@ $(document).ready(function() {
 
             html += tmpl('tweet_tmpl', _o);
         };
+        console.log("Tablica: " + scoreResult[2]);
+        console.log("Ilosc danych: " + data.length);
         $('.tweet-results').html(html);
+        createHistogram(scoreResult);
     }
+
+    function createHistogram(scoreResult)
+    {
+
+
+
+        var data = [
+            {
+                x: scoreResult,
+                type: 'histogram'
+            }
+        ];
+        Plotly.newPlot('graf', data);
+    }
+
+    function makeGraph()
+    {
+        var container = document.getElementById("graph");
+        var labels = document.getElementById("labels");
+        var dnl = container.getElementsByTagName("li");
+        for(var i = 0; i < dnl.length; i++)
+        {
+            var item = dnl.item(i);
+            var value = item.innerHTML;
+            var content = value.split(":");
+            value = content[0];
+            item.style.height=value + "px";
+            item.style.top=(199 - value) + "px";
+            item.style.left = (i * 50 + 20) + "px";
+            item.style.height = value + "px";
+            item.innerHTML = value;
+            item.style.visibility="visible";
+            left = (i * 50 + 58) + "px";
+            labels.innerHTML = labels.innerHTML +
+                "<span style='position:absolute;top:-16px;left:"+
+                left+";background:"+ color+"'>" + year + "</span>";
+        }
+    }
+    window.onload=makeGraph;
 
     function oops(data) {
         $('.error').show();
