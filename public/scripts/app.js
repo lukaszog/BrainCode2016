@@ -31,15 +31,19 @@ $(document).ready(function() {
     function parseData(data) {
         disableState();
         var scoreResult = [];
+        var srednia = 0;
+        var ilosc = 0;
         var html = '';
         for (var i = 0; i < data.length; i++) {
             var s = data[i].sentiment,
                 t = data[i].tweet;
-            console.log("Wynik: " + s.score);
 
             if(s.score != 0) {
                 scoreResult[i] = s.score;
                 console.log("Wynik: " + s.score);
+                srednia+= s.score;
+                console.log("Srednia: " + srednia);
+                ilosc++;
 
             }
             var _o = {
@@ -57,17 +61,15 @@ $(document).ready(function() {
 
             html += tmpl('tweet_tmpl', _o);
         };
-        console.log("Tablica: " + scoreResult[2]);
-        console.log("Ilosc danych: " + data.length);
+        console.log("Rozmiar tablicy: " + scoreResult.length);
+        console.log("Ilosc danych: " + ilosc);
+        console.log("Srednia wyniku: " + srednia/scoreResult.length);
         $('.tweet-results').html(html);
         createHistogram(scoreResult);
     }
 
     function createHistogram(scoreResult)
     {
-
-
-
         var data = [
             {
                 x: scoreResult,

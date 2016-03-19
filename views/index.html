@@ -3,69 +3,180 @@
 
 <head>
     <title>Sentiment Analysis App</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap-material-design/dist/css/ripples.min.css">
+
+    <link rel="stylesheet" href="styles/main.css">
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
+
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
 
-<hr/>
-<input type="text" id="searchText" placeholder="Enter the text you would like to see the analysis for and hit return">
-<div class="results">
-    <h3>Results</h3>
-    <lable class="loading">Loading.. Please wait</lable>
-    <br/>
-    <lable class="error">Oops.. Something went wrong</lable>
-    <br/>
+<!-- Add your site or application content here -->
+<div class="header">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="#/">Sentiment Analysis App</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/">Home</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>Wprowadź tekst</h1>
+        <input type="text" id="searchText" placeholder="Wprowadź tekst">
+        <div class="results">
+            <h3>Results</h3>
+            <lable class="loading">Loading.. Please wait</lable>
+            <br/>
+            <lable class="error">Oops.. Something went wrong</lable>
+            <br/>
+        </div>
+
+
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="scripts/app.js"></script>
+
+        <div id="graf"></div>
+
+        <script type="text/html" id="tweet_tmpl">
+            <article>
+                <div class="left">
+                    <img src="{{=imgSrc}}">
+                    <p>{{=tweet}}
+                        <a href="{{=tweetLink}}" target="_blank">Link</a></p>
+                </div>
+                <div class="right">
+                    <table>
+                        <tr>
+                            <td>Score</td>
+                            <td>{{=score}}</td>
+                        </tr>
+                        <tr>
+                            <td>Comparative</td>
+                            <td>{{=comparative}}</td>
+                        </tr>
+                        <tr>
+                            <td>Favorited</td>
+                            <td>{{=favorited}}</td>
+                        </tr>
+                        <tr>
+                            <td>Retweeted</td>
+                            <td>{{=retweet}}</td>
+                        </tr>
+                        <tr>
+                            <td>Words Matched</td>
+                            <td>{{=wordsMatched}}</td>
+                        </tr>
+                        <tr>
+                            <td>Positive Words</td>
+                            <td>{{=positiveWords}}</td>
+                        </tr>
+                        <tr>
+                            <td>Negative Words</td>
+                            <td>{{=negativeWords}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+        </script>
+
+
+    </div>
+
+
+
+</div>
+
+<div class="footer">
+    <div class="container">
+        <p><span class="glyphicon glyphicon-heart"></span> BrainCode 2016</p>
+    </div>
+</div>
+
+
 <section class="tweet-results">
 </section>
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="scripts/app.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+<script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+<script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-<div id="graf"></div>
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/restservice.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/about.js"></script>
+<script src="scripts/controllers/nowywidok.js"></script>
+<!-- endbuild -->
 
-<script type="text/html" id="tweet_tmpl">
-    <article>
-        <div class="left">
-            <img src="{{=imgSrc}}">
-            <p>{{=tweet}}
-                <a href="{{=tweetLink}}" target="_blank">Link</a></p>
-        </div>
-        <div class="right">
-            <table>
-                <tr>
-                    <td>Score</td>
-                    <td>{{=score}}</td>
-                </tr>
-                <tr>
-                    <td>Comparative</td>
-                    <td>{{=comparative}}</td>
-                </tr>
-                <tr>
-                    <td>Favorited</td>
-                    <td>{{=favorited}}</td>
-                </tr>
-                <tr>
-                    <td>Retweeted</td>
-                    <td>{{=retweet}}</td>
-                </tr>
-                <tr>
-                    <td>Words Matched</td>
-                    <td>{{=wordsMatched}}</td>
-                </tr>
-                <tr>
-                    <td>Positive Words</td>
-                    <td>{{=positiveWords}}</td>
-                </tr>
-                <tr>
-                    <td>Negative Words</td>
-                    <td>{{=negativeWords}}</td>
-                </tr>
-            </table>
-        </div>
-    </article>
+<script>
+
+    // Include app dependency on ngMaterial
+    $(function() {
+        $.material.init();
+    });
+    angular.module('myApp', ['ngMaterial']);
+
 </script>
+
 </body>
 </html>
