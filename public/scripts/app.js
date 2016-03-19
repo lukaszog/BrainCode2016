@@ -34,6 +34,11 @@ $(document).ready(function() {
         var srednia = 0;
         var ilosc = 0;
         var html = '';
+        var stat ='';
+        var color ='';
+        var positive=0;
+        var negative=0;
+        var neutral=0;
         for (var i = 0; i < data.length; i++) {
             var s = data[i].sentiment,
                 t = data[i].tweet;
@@ -46,11 +51,28 @@ $(document).ready(function() {
                 ilosc++;
 
             }
+
+            if(s.score > 0)
+            {
+                color = '#3AFF32';
+                positive++;
+            }
+            if(s.score < 0)
+            {
+                color = '#FF0000';
+                negative++;
+            }
+            if(s.score == 0)
+            {
+                neutral++;
+            }
+
             var _o = {
                 imgSrc: t.user.profile_image_url,
                 tweetLink: 'http://twitter.com/' + t.user.screen_name + '/status/' + t.id_str,
                 tweet: t.text,
                 score: s.score ? s.score : '--',
+                color: color,
                 comparative: s.comparative ? s.comparative : '--',
                 favorited: t.favorite_count ? t.favorite_count : 0,
                 retweet: t.retweet_count ? t.retweet_count : 0,
@@ -61,11 +83,37 @@ $(document).ready(function() {
 
             html += tmpl('tweet_tmpl', _o);
         };
+
+        var _d = {
+            sred: srednia/scoreResult.length
+        };
+        stat += tmpl('dane', _d);
+
+
         console.log("Rozmiar tablicy: " + scoreResult.length);
         console.log("Ilosc danych: " + ilosc);
         console.log("Srednia wyniku: " + srednia/scoreResult.length);
         $('.tweet-results').html(html);
+        $('.tweet-stat').html(stat);
+
         createHistogram(scoreResult);
+        graph(positive,negative,neutral);
+    }
+
+    function graph(a,b,c)
+    {
+        var data = [{
+            values: [a,b,c],
+            labels: ['Pozytywne', 'Negatywne', 'Neutralne'],
+            type: 'pie'
+        }];
+
+        var layout = {
+            height: 400,
+            width: 500
+        };
+
+        Plotly.newPlot('myDiv', data, layout);
     }
 
     function createHistogram(scoreResult)

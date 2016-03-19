@@ -70,9 +70,9 @@
         <input type="text" id="searchText" placeholder="Wprowadź tekst">
         <div class="results">
             <h3>Results</h3>
-            <lable class="loading">Loading.. Please wait</lable>
+            <lable class="loading">Wczytywanie proszę czkeć</lable>
             <br/>
-            <lable class="error">Oops.. Something went wrong</lable>
+            <lable class="error">Coś poszło nie tak, spróbuj jeszcze raz</lable>
             <br/>
         </div>
 
@@ -80,51 +80,29 @@
 
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="scripts/app.js"></script>
-
+        <script type="text/html" id="dane">
+            <p>Srednia wyników: {{=sred}}</p>
+        </script>
         <div id="graf"></div>
+        <div id="myDiv"></div>
+
+         <section class="tweet-stat">
+        </section>
+
 
         <script type="text/html" id="tweet_tmpl">
-            <article>
+            <article style="background-color: {{=color}}">
                 <div class="left">
                     <img src="{{=imgSrc}}">
                     <p>{{=tweet}}
                         <a href="{{=tweetLink}}" target="_blank">Link</a></p>
                 </div>
-                <div class="right">
-                    <table>
-                        <tr>
-                            <td>Score</td>
-                            <td>{{=score}}</td>
-                        </tr>
-                        <tr>
-                            <td>Comparative</td>
-                            <td>{{=comparative}}</td>
-                        </tr>
-                        <tr>
-                            <td>Favorited</td>
-                            <td>{{=favorited}}</td>
-                        </tr>
-                        <tr>
-                            <td>Retweeted</td>
-                            <td>{{=retweet}}</td>
-                        </tr>
-                        <tr>
-                            <td>Words Matched</td>
-                            <td>{{=wordsMatched}}</td>
-                        </tr>
-                        <tr>
-                            <td>Positive Words</td>
-                            <td>{{=positiveWords}}</td>
-                        </tr>
-                        <tr>
-                            <td>Negative Words</td>
-                            <td>{{=negativeWords}}</td>
-                        </tr>
-                    </table>
-                </div>
+
             </article>
         </script>
 
+        <section class="tweet-results">
+        </section>
 
     </div>
 
@@ -139,8 +117,6 @@
 </div>
 
 
-<section class="tweet-results">
-</section>
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
@@ -160,13 +136,7 @@
 <!-- endbower -->
 <!-- endbuild -->
 
-<!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/app.js"></script>
-<script src="scripts/restservice.js"></script>
-<script src="scripts/controllers/main.js"></script>
-<script src="scripts/controllers/about.js"></script>
-<script src="scripts/controllers/nowywidok.js"></script>
-<!-- endbuild -->
+
 
 <script>
 
