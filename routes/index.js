@@ -57,14 +57,42 @@ router.post('/search', function(req, res) {
 
 function parse(data) {
      var html = '';
+    var color ='';
+    var positive=0;
+    var negative=0;
+    var neutral=0;
+    var i=0;
     for (var i = 0; i < data.length; i++) {
         var s = data[i].sentiment,
             t = data[i].tweet;
+        if(s.score == 0)
+        {
+            color = 'black';
+            neutral++;
+        }
 
         if(s.score != 0 || s.score != null) {
+
+            if(s.score > 0)
+            {
+                color = '#3AFF32';
+                positive++;
+            }
+            if(s.score < 0)
+            {
+                color = '#FF0000';
+                negative++;
+            }
+            if(s.score == 0)
+            {
+                color = 'black';
+                neutral++;
+            }
+
             dane[i] = {
                 waga: s.score,
-                tweet: t.text
+                tweet: t.text,
+                color: color
             };
         }
         var _o = {
